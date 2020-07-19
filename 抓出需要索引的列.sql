@@ -1,9 +1,10 @@
-select owner, column_name, num_rows, cardinality, selectivity
+select owner, table_name, column_name, num_rows, cardinality, selectivity
   from (select b.owner,
+               a.table_name,
                a.column_name,
                b.num_rows,
                a.num_distinct cardinality,
-               round(a.num_distinct / b.num_rows * 100ï¼Œ 2) selectivity
+               round(a.num_distinct / b.num_rows * 100£¬ 2) selectivity
           from dba_tab_col_statistics a, dba_tables b
          where a.owner = b.owner
            and a.table_name = b.table_name
